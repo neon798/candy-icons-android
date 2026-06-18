@@ -12,13 +12,29 @@ MATCHED_SVGS = "matched_svgs.txt"
 PNG_SIZE = 192
 
 
+_RESERVED = frozenset({
+    "abstract", "assert", "boolean", "break", "byte", "case", "catch",
+    "char", "class", "const", "continue", "default", "do", "double",
+    "else", "enum", "extends", "final", "finally", "float", "for",
+    "goto", "if", "implements", "import", "instanceof", "int",
+    "interface", "long", "native", "new", "null", "package",
+    "private", "protected", "public", "return", "short", "static",
+    "strictfp", "super", "switch", "synchronized", "this", "throw",
+    "throws", "transient", "true", "false", "try", "void", "volatile",
+    "while",
+})
+
+
 def sanitize(name):
     """Replace invalid resource name chars with underscores, lowercase,
-    and prepend underscore if it starts with a non-letter."""
+    and prepend underscore if it starts with a non-letter or is a
+    reserved keyword."""
     result = ""
     for c in name.lower():
         result += c if c.isalnum() or c == "_" else "_"
     if result and not result[0].isalpha():
+        result = "_" + result
+    if result in _RESERVED:
         result = "_" + result
     return result
 
