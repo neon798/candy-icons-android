@@ -137,12 +137,11 @@ def generate_mapping():
 
     print(f"  After fuzzy match: {len(matches)} total entries, {len(candy_matched)} Candy SVGs matched")
 
-    # Deduplicate: keep first occurrence of each component only
-    # (multiple SVGs may match the same component; first match wins)
+    # Deduplicate: keep first occurrence of each (candy_name, component) pair
     seen = set()
     deduped = []
     for m in matches:
-        key = m["component"]
+        key = (m["svg"], m["component"])
         if key not in seen:
             seen.add(key)
             deduped.append(m)
