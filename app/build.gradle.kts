@@ -25,9 +25,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    aaptOptions {
-        cruncherEnabled = false
-    }
 
     dependenciesInfo {
         includeInApk = false
