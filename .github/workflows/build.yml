@@ -28,7 +28,7 @@ jobs:
           pip install cairosvg
 
       - name: Fetch Lawnicons appfilter.xml
-        run: curl -L -o lawnicons_appfilter.xml https://raw.githubusercontent.com/LawnchairLauncher/lawnicons/develop/appfilter.xml
+        run: curl -L -o lawnicons_appfilter.xml https://raw.githubusercontent.com/LawnchairLauncher/lawnicons/develop/app/assets/appfilter.xml
 
       - name: Prebuild (generate PNGs + appfilter.xml)
         run: |
