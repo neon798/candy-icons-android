@@ -13,10 +13,13 @@ PNG_SIZE = 192
 
 
 def sanitize(name):
-    """Replace invalid resource name chars with underscores and lowercase."""
+    """Replace invalid resource name chars with underscores, lowercase,
+    and prepend underscore if it starts with a non-letter."""
     result = ""
     for c in name.lower():
         result += c if c.isalnum() or c == "_" else "_"
+    if result and not result[0].isalpha():
+        result = "_" + result
     return result
 
 
