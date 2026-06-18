@@ -23,5 +23,10 @@ echo "--- Step 3: Generating appfilter.xml ---"
 python3 "$SCRIPT_DIR/generate_appfilter.py"
 echo ""
 
+# Step 4: Generate drawable.xml for manual icon picking
+echo "--- Step 4: Generating drawable.xml ---"
+python3 "$SCRIPT_DIR/generate_drawable_xml.py"
+echo ""
+
 echo "=== Prebuild complete ==="
 echo "Run './gradlew assembleRelease' to build the APK."
