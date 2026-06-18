@@ -12,6 +12,14 @@ MATCHED_SVGS = "matched_svgs.txt"
 PNG_SIZE = 192
 
 
+def sanitize(name):
+    """Replace invalid resource name chars with underscores."""
+    result = ""
+    for c in name:
+        result += c if c.isalnum() or c == "_" else "_"
+    return result
+
+
 def render_svg(svg_path, png_path, size):
     """Render SVG to PNG using cairosvg at the given size."""
     try:
@@ -69,7 +77,8 @@ def main():
                 failed += 1
                 continue
 
-        png_name = svg_file.replace(".svg", ".png")
+        stem = svg_file[:-4]
+        png_name = sanitize(stem) + ".png"
         png_path = output_dir / png_name
 
         if png_path.exists():

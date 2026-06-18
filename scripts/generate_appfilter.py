@@ -10,6 +10,14 @@ MAPPING_JSON = "mapping.json"
 APPFILTER_OUT = "app/src/main/assets/appfilter.xml"
 
 
+def sanitize(name):
+    """Replace invalid resource name chars with underscores."""
+    result = ""
+    for c in name:
+        result += c if c.isalnum() or c == "_" else "_"
+    return result
+
+
 def generate():
     root_dir = Path(__file__).resolve().parent.parent
     os.chdir(root_dir)
@@ -38,7 +46,7 @@ def generate():
         if component.startswith("ComponentInfo{"):
             component = component[14:-1]
         # Use the SVG name as drawable name so it matches the PNG filename
-        drawable = entry["svg"]
+        drawable = sanitize(entry["svg"])
         name = entry.get("name", drawable)
         lines.append(
             f'  <item component="ComponentInfo{{{component}}}" drawable="{drawable}" name="{name}" />'
