@@ -11,9 +11,9 @@ APPFILTER_OUT = "app/src/main/assets/appfilter.xml"
 
 
 def sanitize(name):
-    """Replace invalid resource name chars with underscores."""
+    """Replace invalid resource name chars with underscores and lowercase."""
     result = ""
-    for c in name:
+    for c in name.lower():
         result += c if c.isalnum() or c == "_" else "_"
     return result
 
