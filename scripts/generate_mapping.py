@@ -161,12 +161,14 @@ def generate_mapping():
     print(f"Unmatched (no mapping):    {len(unmatched & candy_matched)}")
     print(f"Total mapping entries:     {len(deduped)}")
 
-    # Save list of matched SVGs for the convert script
-    matched_svgs = sorted(candy_matched)
+    # Save all Candy SVGs to render (matched + unmatched)
+    # The appfilter.xml will only reference matched ones, but all SVGs
+    # get rendered as PNGs for manual icon picking via drawable.xml
+    all_svgs = sorted(candy_names)
     with open("matched_svgs.txt", "w") as f:
-        for s in matched_svgs:
+        for s in all_svgs:
             f.write(s + ".svg\n")
-    print(f"Written matched_svgs.txt with {len(matched_svgs)} SVG filenames")
+    print(f"Written matched_svgs.txt with {len(all_svgs)} SVG filenames")
 
 
 if __name__ == "__main__":
